@@ -1,0 +1,6 @@
+.cache
+.DS_Store
+.zig-cache
+zig-pkg
+zig-out
+compile_commands.json
