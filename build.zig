@@ -2,18 +2,10 @@ const std = @import("std");
 const juzi = @import("juzi");
 const zon = @import("build.zig.zon");
 const zcc = @import("compile_commands");
-const builtin = @import("builtin");
 
 pub fn build(b: *std.Build) void {
-    const target = b.standardTargetOptions(.{
-        .default_target = if (builtin.os.tag == .windows) .{ .abi = .msvc } else .{},
-    });
-    const optimize = b.standardOptimizeOption(.{});
-
     var plugin = juzi.Plugin.init(b, .{
         .juzi = b.dependency("juzi", .{}),
-        .target = target,
-        .optimize = optimize,
         .config = .{
             .product_name = "jzr-granular",
             .plugin_name = "JZR-Granular",
@@ -52,28 +44,28 @@ pub fn build(b: *std.Build) void {
             "-includechrono",
         },
     });
-    plugin.addJuceMacro("JUCE_VST3_CAN_REPLACE_VST2", "0");
-    plugin.addJuceMacro("JUCE_WEB_BROWSER", "0");
-    plugin.addJuceMacro("JUCE_USE_CURL", "0");
+    plugin.root_module.addCMacro("JUCE_VST3_CAN_REPLACE_VST2", "0");
+    plugin.root_module.addCMacro("JUCE_WEB_BROWSER", "0");
+    plugin.root_module.addCMacro("JUCE_USE_CURL", "0");
     plugin.addBinaryData(.{
         .files = &.{"res/UbuntuRegular.ttf"},
     });
 
-    const result = plugin.finalize();
+    plugin.finalize();
 
-    var steps_it = result.install_steps.valueIterator();
+    var steps_it = plugin.install_steps.valueIterator();
     while (steps_it.next()) |step| {
         b.getInstallStep().dependOn(step.*);
     }
 
     var targets: std.ArrayList(*std.Build.Step.Compile) = .empty;
-    var artifacts_it = result.artifacts.valueIterator();
+    var artifacts_it = plugin.artifacts.valueIterator();
     while (artifacts_it.next()) |artifact| {
         targets.append(b.allocator, artifact.*) catch @panic("OOM");
     }
-    const cdb_step = zcc.createStep(b, "cdb", targets.toOwnedSlice(b.allocator) catch @panic("OOM"));
-
-    if (result.binary_data) |bd| {
-        cdb_step.dependOn(&bd.step);
+    const targetsSlice = targets.toOwnedSlice(b.allocator) catch @panic("OOM");
+    const cdb_step = zcc.createStep(b, "cdb", targetsSlice);
+    for (targetsSlice) |t| {
+        cdb_step.dependOn(&t.step);
     }
 }

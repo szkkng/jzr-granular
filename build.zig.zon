@@ -5,8 +5,8 @@
     .minimum_zig_version = "0.16.0",
     .dependencies = .{
         .juzi = .{
-            .url = "git+https://codeberg.org/kengo/juzi#cef53c83ca4427ad1e69e9d5484cd958d71002a7",
-            .hash = "juzi-0.1.0-kngBhyhbAQBTdpiVkvjSoq6k9nj26aV8L7_ZY6Zg3j5o",
+            .url = "git+https://codeberg.org/kengo/juzi#0773a93933b235a51b89be240c27551182e3058a",
+            .hash = "juzi-0.1.0-kngBh4NpAQCmZGpm_z36VtW61qpmnvhlVCHsX_8GxuKS",
         },
         .compile_commands = .{
             .url = "https://github.com/the-argus/zig-compile-commands/archive/9400cd1963ea6bb58fe47ba7d9700075b808cdd2.tar.gz",

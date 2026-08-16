@@ -14,14 +14,16 @@ Requirements:
 git clone https://github.com/szkkng/jzr-granular.git
 cd jzr-granular
 
-# Build VST3, AU, and Standalone and install them under ./zig-out
+# Build VST3, AUv2, and Standalone into ./zig-out
 zig build -Doptimize=ReleaseFast
 
-# Alternatively, use `-p` to install each format to a custom location
-zig build vst3 -Doptimize=ReleaseFast -p ~/Library/Audio/Plug-Ins/VST3
-zig build au -Doptimize=ReleaseFast -p ~/Library/Audio/Plug-Ins/Components
+# Build and install plugin formats (may require elevated permissions)
+zig build copy -Doptimize=ReleaseFast
 
 # Run Standalone in debug mode
 zig build run
+
+# Print available steps
+zig build -l
 ```
 
