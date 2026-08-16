@@ -11,7 +11,7 @@ Requirements:
 - [JUCE dependency packages](https://github.com/juce-framework/JUCE/blob/master/docs/Linux%20Dependencies.md#packages) (Linux only)
 
 ```sh
-git clone https://github.com/szkkng/jzr-granular.git
+git clone https://codeberg.org/kengo/jzr-granular.git
 cd jzr-granular
 
 # Build VST3, AUv2, and Standalone into ./zig-out
