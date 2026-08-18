@@ -30,6 +30,7 @@ pub fn build(b: *std.Build) void {
             "ui/EditorContent.cpp",
             "ui/EditorLnf.cpp",
         },
+        .flags = cxx_flags,
     });
     plugin.root_module.addIncludePath(b.path("export/rnbo"));
     plugin.root_module.addIncludePath(b.path("export/rnbo/common"));
@@ -39,10 +40,7 @@ pub fn build(b: *std.Build) void {
             "rnbo_granular.cpp",
             "rnbo/RNBO.cpp",
         },
-        .flags = &.{
-            // RNBO_Engine.cpp uses std::chrono without including its header.
-            "-includechrono",
-        },
+        .flags = rnbo_cxx_flags,
     });
     plugin.root_module.addCMacro("JUCE_VST3_CAN_REPLACE_VST2", "0");
     plugin.root_module.addCMacro("JUCE_WEB_BROWSER", "0");
@@ -69,3 +67,17 @@ pub fn build(b: *std.Build) void {
         cdb_step.dependOn(&t.step);
     }
 }
+
+const cxx_flags = &.{
+    "--std=c++20",
+    "-fvisibility=hidden",
+    "-fvisibility-inlines-hidden",
+};
+
+const rnbo_cxx_flags = &.{
+    "--std=c++20",
+    "-fvisibility=hidden",
+    "-fvisibility-inlines-hidden",
+    // RNBO_Engine.cpp uses std::chrono without including its header.
+    "-includechrono",
+};
