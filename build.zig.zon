@@ -2,15 +2,11 @@
     .name = .jzr_granular,
     .version = "0.0.1",
     .fingerprint = 0x61d8c61c084b0d9f,
-    .minimum_zig_version = "0.16.0",
+    .minimum_zig_version = "0.17.0",
     .dependencies = .{
         .juzi = .{
-            .url = "git+https://codeberg.org/kengo/juzi#cf42a0249d19c0279551f43a7817bbe8f384e2c4",
-            .hash = "juzi-0.1.0-kngBh75kAQAtkjjeXyU0aohOz7H-vC7qtCvKfZ0T9otr",
-        },
-        .compile_commands = .{
-            .url = "https://github.com/the-argus/zig-compile-commands/archive/9400cd1963ea6bb58fe47ba7d9700075b808cdd2.tar.gz",
-            .hash = "zig_compile_commands-0.0.1-OZg5-e_JAAAGg1WHAePtq4l4Uvjs34BexnFFCZk63EaG",
+            .url = "git+https://codeberg.org/kengo/juzi.git#fa8063218e5251f30fe565ad56b66c98da0bfebf",
+            .hash = "juzi-0.1.0-kngBhxVsAQDxuDV6nP83Q05YTNJi_roXbiyxpHZL8J2V",
         },
     },
     .paths = .{
