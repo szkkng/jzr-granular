@@ -5,8 +5,8 @@
     .minimum_zig_version = "0.17.0",
     .dependencies = .{
         .juzi = .{
-            .url = "git+https://codeberg.org/kengo/juzi.git#fa8063218e5251f30fe565ad56b66c98da0bfebf",
-            .hash = "juzi-0.1.0-kngBhxVsAQDxuDV6nP83Q05YTNJi_roXbiyxpHZL8J2V",
+            .url = "git+https://github.com/szkkng/juzi#cd376647a9d18dc2af8469cc3cae8035ac5556ae",
+            .hash = "juzi-0.1.0-kngBhxxsAQCAeadtXbDgCZpY2S2WTHnzEmka6mfKfM9q",
         },
     },
     .paths = .{
